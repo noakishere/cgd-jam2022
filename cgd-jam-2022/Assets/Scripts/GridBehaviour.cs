@@ -20,9 +20,9 @@ public class GridBehaviour : MonoBehaviour
 
         Debug.Log(text);
 
+        TileInitiator.Instance.PopulateList(this);
     }
 
-    // Update is called once per frame
     void Update()
     {
 

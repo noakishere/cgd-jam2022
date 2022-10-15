@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileInitiator : MonoBehaviour
+public class TileInitiator : SingletonMonoBehaviour<TileInitiator>
 {
     [SerializeField] private GameObject grid;
+    [SerializeField] private List<GridBehaviour> grids;
     public int gridNum;
     // Start is called before the first frame update
     void Start()
@@ -23,13 +24,17 @@ public class TileInitiator : MonoBehaviour
     {
         for (int i = -2; i <= 2; i++)
         {
-            Debug.Log($"<color=green>Row {i} is now</color>");
             for (int j = -4; j <= 4; j++)
             {
-                Debug.Log($"{j} is numebr J");
                 Instantiate(grid, new Vector3(j * 2.0f, i * 2.0f, 0), Quaternion.identity);
             }
         }
+    }
+
+    // This could be refactored for performance with events and such
+    public void PopulateList(GridBehaviour newGrid)
+    {
+        grids.Add(newGrid);
     }
 
 
